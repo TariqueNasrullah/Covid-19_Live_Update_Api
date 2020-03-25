@@ -1,0 +1,13 @@
+setup.py
+corona_scraper/__init__.py
+corona_scraper/items.py
+corona_scraper/middlewares.py
+corona_scraper/pipelines.py
+corona_scraper/settings.py
+corona_scraper/spiders/__init__.py
+corona_scraper/spiders/corona.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
