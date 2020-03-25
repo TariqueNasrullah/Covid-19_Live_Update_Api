@@ -46,4 +46,25 @@ class CountryData(models.Model):
         return self.name
     
     
+class DateCaseData(models.Model):
+    case = models.IntegerField(default=0, null=False)
+    date = models.DateField(auto_now_add=False)
 
+    class Meta:
+        verbose_name = 'Date Case'
+        ordering = ['-date']
+
+    def __str__(self):
+        return str(self.date)
+
+class DateDeathData(models.Model):
+    death = models.IntegerField(default=0, null=False)
+    date = models.DateField(auto_now_add=False)
+
+    class Meta:
+        verbose_name = 'Date Death'
+        ordering = ['-date']
+
+    def __str__(self):
+        return str(self.date)
+    
