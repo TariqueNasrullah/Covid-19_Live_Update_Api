@@ -55,6 +55,8 @@ router.register(r'users', UserViewSet)
 router.register(r'currentSituation', views.CoronaDataCurrentViewSet)
 router.register(r'data', views.CoronaDataViewSet)
 router.register(r'countryDataList', views.CountryDataViewSet)
+router.register(r'dateCaseDataList', views.DateCaseViewSet)
+router.register(r'DateDeathDataList', views.DateDeathViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CoronaData, CountryData
+from .models import CoronaData, CountryData, DateCaseData, DateDeathData
 
 class CoronaDataSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,4 +22,14 @@ class CoronaDataSerializer(serializers.ModelSerializer):
 class CountryDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = CountryData
+        fields = '__all__'
+
+class DateCaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DateCaseData
+        fields = '__all__'
+
+class DateDeathSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DateDeathData
         fields = '__all__'

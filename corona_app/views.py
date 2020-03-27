@@ -8,8 +8,8 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework import viewsets
 
-from .models import CoronaData, CountryData
-from .serializers import CoronaDataSerializer, CountryDataSerializer
+from .models import CoronaData, CountryData, DateCaseData, DateDeathData
+from .serializers import CoronaDataSerializer, CountryDataSerializer, DateCaseSerializer, DateDeathSerializer
 
 import datetime
 
@@ -28,4 +28,14 @@ class CoronaDataCurrentViewSet(viewsets.ModelViewSet):
 class CountryDataViewSet(viewsets.ModelViewSet):
     queryset = CountryData.objects.all().order_by('-total_case')
     serializer_class = CountryDataSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class DateCaseViewSet(viewsets.ModelViewSet):
+    queryset = DateCaseData.objects.all().order_by('date')
+    serializer_class = DateCaseSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class DateDeathViewSet(viewsets.ModelViewSet):
+    queryset = DateDeathData.objects.all().order_by('date')
+    serializer_class = DateDeathSerializer
     permission_classes = [permissions.IsAuthenticated]
