@@ -20,4 +20,4 @@ while True:
             else:
                 logging.error('Crawl Unssuccessful RETCODE: {}'.format(return_code))
             break
-    time.sleep(20)
+    time.sleep(120)
