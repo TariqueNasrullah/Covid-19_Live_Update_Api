@@ -36,6 +36,9 @@ services:
     
   scraper_1:
     image: coronaimage
+    build:
+      context: .
+      dockerfile: DockerFile
     command: sh -c "cd corona_scraper && python3 runer.py"
     networks: 
       - postgres
@@ -44,6 +47,9 @@ services:
 
   scraper_2:
     image: coronaimage
+    build:
+      context: .
+      dockerfile: DockerFile
     command: sh -c "cd corona_country_scraper && python3 runer.py"
     networks: 
       - postgres
