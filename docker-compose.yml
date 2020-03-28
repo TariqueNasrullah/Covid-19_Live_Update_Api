@@ -12,12 +12,30 @@ services:
     networks: 
       - postgres
     restart: unless-stopped
+  
+    scraper_1:
+      image: coronaimage
+      build:
+        context: .
+        dockerfile: DockerFile
+      command: sh -c "cd corona_scraper && python3 runer.py"
+      networks: 
+        - postgres
+      restart: unless-stopped
+      depends_on:
+        - postgres
+  
+    scraper_2:
+      image: coronaimage
+      command: sh -c "cd corona_country_scraper && python3 runer.py"
+      networks: 
+        - postgres
+      restart: unless-stopped
+      depends_on:
+        - postgres
 
   web:
     image: coronaimage
-    build:
-      context: .
-      dockerfile: DockerFile
     command: > 
         sh -c "python3 manage.py makemigrations &&
         python3 manage.py migrate &&
@@ -35,29 +53,7 @@ services:
     depends_on: 
       - postgres
     
-  scraper_1:
-    image: coronaimage
-    build:
-      context: .
-      dockerfile: DockerFile
-    command: sh -c "cd corona_scraper && python3 runer.py"
-    networks: 
-      - postgres
-    restart: unless-stopped
-    depends_on:
-      - postgres
-
-  scraper_2:
-    image: coronaimage
-    build:
-      context: .
-      dockerfile: DockerFile
-    command: sh -c "cd corona_country_scraper && python3 runer.py"
-    networks: 
-      - postgres
-    restart: unless-stopped
-    depends_on:
-      - postgres
+  
 
 
 networks:
