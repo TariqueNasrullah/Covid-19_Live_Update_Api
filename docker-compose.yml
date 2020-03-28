@@ -1,0 +1,59 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: tariquenasrullah/coronadb:1
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks: 
+      - postgres
+    restart: unless-stopped
+
+  web:
+    image: coronaimage
+    build:
+      context: .
+      dockerfile: DockerFile
+    command: > 
+        sh -c "python3 manage.py makemigrations &&
+        python3 manage.py migrate &&
+        python3 manage.py createadmin &&
+        python3 manage.py runserver 0.0.0.0:8080 && 
+        cd corona_scraper && 
+        python3 runer.py"
+    volumes:
+      - .:/code
+    ports:
+      - "8080:8080"
+    networks: 
+      - postgres
+    depends_on: 
+      - postgres
+    
+  scraper_1:
+    image: coronaimage
+    command: sh -c "cd corona_scraper && python3 runer.py"
+    networks: 
+      - postgres
+    depends_on:
+      - postgres
+
+  scraper_2:
+    image: coronaimage
+    command: sh -c "cd corona_country_scraper && python3 runer.py"
+    networks: 
+      - postgres
+    depends_on:
+      - postgres
+
+
+networks:
+  postgres:
+    driver: bridge
+volumes:
+    postgres:
+    pgadmin:

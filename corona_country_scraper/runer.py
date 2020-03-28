@@ -3,12 +3,12 @@ import subprocess
 import setproctitle
 import time
 
-setproctitle.setproctitle('Scraper Corona')
+setproctitle.setproctitle('Scraper Country')
 
 logging.basicConfig(filename='scraper.log',level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 while True:
-    process = subprocess.Popen(['scrapy', 'crawl', 'corona'], 
+    process = subprocess.Popen(['scrapy', 'crawl', 'country'], 
                            stdout=subprocess.PIPE,
                            universal_newlines=True)
     while True:
