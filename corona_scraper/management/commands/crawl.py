@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from corona_scraper.corona_scraper.spiders.corona import CoronaSpider
+from corona_scraper.spiders import corona.CoronaSpider
+
 import os
 
 from scrapy.crawler import CrawlerProcess
