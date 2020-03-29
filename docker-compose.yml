@@ -11,7 +11,7 @@ services:
       - "5432:5432"
     networks: 
       - postgres
-    restart: unless-stopped
+    restart: always
   
   scraper_1:
     image: coronaimage
@@ -21,7 +21,7 @@ services:
     command: sh -c "cd corona_scraper && python3 runer.py"
     networks: 
       - postgres
-    restart: unless-stopped
+    restart: always
     depends_on:
       - postgres
 
@@ -30,7 +30,7 @@ services:
     command: sh -c "cd corona_country_scraper && python3 runer.py"
     networks: 
       - postgres
-    restart: unless-stopped
+    restart: always
     depends_on:
       - postgres
 
@@ -49,7 +49,7 @@ services:
       - "8080:8080"
     networks: 
       - postgres
-    restart: unless-stopped
+    restart: always
     depends_on: 
       - postgres
     
