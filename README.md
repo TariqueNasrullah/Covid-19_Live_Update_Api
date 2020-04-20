@@ -8,4 +8,4 @@ Data Source [Worldometers](https://www.worldometers.info/coronavirus/)
 
 ## Application
 
-Written in Flutter [Covid19 realtime update App](https://github.com/TariqueNasrullah/Covid-19_Live_Update_ap)
+Written in Flutter [Covid19 realtime update App](https://github.com/TariqueNasrullah/Covid-19_Live_Update_app)
