@@ -49,21 +49,21 @@ class CountrySpider(scrapy.Spider):
                 tds = tr.xpath('.//td')
                 item = CoronaCountryScraperItem()
 
-                country = tds[0].xpath('./text()').get()
+                country = tds[1].xpath('./text()').get()
                 if country is None:
-                    country = tds[0].xpath('.//a/text()').get()
+                    country = tds[1].xpath('.//a/text()').get()
                 if country is None:
-                    country = tds[0].xpath('.//span/text()').get()
+                    country = tds[1].xpath('.//span/text()').get()
                 if country is None:
                     raise Exception('Error at Country name extraction')
                 
-                total_case = toInt(tds[1].xpath('./text()').get())
-                new_case = toInt(tds[2].xpath('./text()').get())
-                death = toInt(tds[3].xpath('./text()').get())
-                new_death = toInt(tds[4].xpath('./text()').get())
-                recovered = toInt(tds[5].xpath('./text()').get())
-                active = toInt(tds[6].xpath('./text()').get())
-                serious = toInt(tds[7].xpath('./text()').get())
+                total_case = toInt(tds[2].xpath('./text()').get())
+                new_case = toInt(tds[3].xpath('./text()').get())
+                death = toInt(tds[4].xpath('./text()').get())
+                new_death = toInt(tds[5].xpath('./text()').get())
+                recovered = toInt(tds[6].xpath('./text()').get())
+                active = toInt(tds[7].xpath('./text()').get())
+                serious = toInt(tds[8].xpath('./text()').get())
 
                 print("{} {} {} {} {} {} {} {}".format(country, total_case, new_case, death, new_death, recovered, active, serious))
                 item['name'] = country
