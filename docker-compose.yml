@@ -18,7 +18,9 @@ services:
     build:
       context: .
       dockerfile: DockerFile
-    command: sh -c "cd corona_scraper && python3 runer.py"
+    command: sh -c "cd corona_scraper && python3 runer.py -s LOG_ENABLED=False"
+    logging:
+      driver: none
     networks: 
       - postgres
     restart: always
@@ -27,7 +29,9 @@ services:
 
   scraper_2:
     image: coronaimage
-    command: sh -c "cd corona_country_scraper && python3 runer.py"
+    command: sh -c "cd corona_country_scraper && python3 runer.py -s LOG_ENABLED=False"
+    logging:
+      driver: none
     networks: 
       - postgres
     restart: always
