@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'corona_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DB_PORT = '5432'
+DB_PORT = '5433'
 DB_HOST = 'postgres'                  # 'localhost'
 DB_NAME = 'postgres'            # 'apidb'
 DB_USER = 'admin'            # 'apidbuser'

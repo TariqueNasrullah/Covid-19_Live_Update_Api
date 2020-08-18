@@ -1,18 +1,21 @@
-version: '3.5'
+version: "3.5"
 
 services:
   postgres:
     image: tariquenasrullah/coronadb:1
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: admin
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: admin
+      DATABASE_HOST: postgres
     volumes:
-       - postgres:/data/postgres
+      - postgres:/data/postgres
     ports:
-      - "5432:5432"
-    networks: 
+      - "5433:5432"
+    networks:
       - postgres
     restart: always
-  
+
   scraper_1:
     image: coronaimage
     build:
@@ -21,7 +24,7 @@ services:
     command: sh -c "cd corona_scraper && python3 runer.py -s LOG_ENABLED=False"
     logging:
       driver: none
-    networks: 
+    networks:
       - postgres
     restart: always
     depends_on:
@@ -32,7 +35,7 @@ services:
     command: sh -c "cd corona_country_scraper && python3 runer.py -s LOG_ENABLED=False"
     logging:
       driver: none
-    networks: 
+    networks:
       - postgres
     restart: always
     depends_on:
@@ -40,29 +43,26 @@ services:
 
   web:
     image: coronaimage
-    command: > 
-        sh -c "python3 manage.py makemigrations &&
-        python3 manage.py migrate &&
-        python3 manage.py createadmin &&
-        python3 manage.py runserver 0.0.0.0:8080 && 
-        cd corona_scraper && 
-        python3 runer.py"
+    command: >
+      sh -c "python3 manage.py makemigrations &&
+      python3 manage.py migrate &&
+      python3 manage.py createadmin &&
+      python3 manage.py runserver 0.0.0.0:8080 && 
+      cd corona_scraper && 
+      python3 runer.py"
     volumes:
       - .:/code
     ports:
       - "8080:8080"
-    networks: 
+    networks:
       - postgres
     restart: always
-    depends_on: 
+    depends_on:
       - postgres
-    
-  
-
 
 networks:
   postgres:
     driver: bridge
 volumes:
-    postgres:
-    pgadmin:
+  postgres:
+  pgadmin:
